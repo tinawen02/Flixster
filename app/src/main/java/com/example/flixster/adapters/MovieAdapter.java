@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixster.MovieDetailsActivity;
 import com.example.flixster.R;
+import com.example.flixster.databinding.ActivityMovieDetailsBinding;
+import com.example.flixster.databinding.ItemMovieBinding;
 import com.example.flixster.models.Movie;
 
 import org.parceler.Parcels;
@@ -28,6 +30,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     Context context;
     List<Movie> movies;
 
+    ItemMovieBinding itemMovieBinding;
+
     public MovieAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
@@ -38,8 +42,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("MovieAdapter", "onCreateViewHolder");
-        View movieView = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
-        return new ViewHolder(movieView);
+
+
+        //Original
+/*        View movieView = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
+        return new ViewHolder(movieView);*/
+
+        //View Binding
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        itemMovieBinding = ItemMovieBinding.inflate(layoutInflater, parent, false);
+        return new ViewHolder(itemMovieBinding);
     }
 
     // Involves populating data into the item through holder
@@ -61,17 +73,31 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        ItemMovieBinding binding;
+
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivPoster;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ivPoster = (ImageView) itemView.findViewById(R.id.ivPoster);
+        // used for reducing view boilerplate
+
+        public ViewHolder(@NonNull ItemMovieBinding itemView) {
+            //super(itemView);      //Instead of this
+            super(itemView.getRoot());
+            this.binding = itemView;
+
+            itemView.getRoot().setOnClickListener(this);
+
+
+/*            ivPoster = (ImageView) itemView.findViewById(R.id.ivPoster);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
-            tvOverview = (TextView) itemView.findViewById(R.id.tvOverview);
+            tvOverview = (TextView) itemView.findViewById(R.id.tvOverview);*/
             // add this as the itemView's OnClickListener
-            itemView.setOnClickListener(this);
+
+            //TODO: NEEDS FIXING
+            //itemView.setOnClickListener(this);
+
+
 
             /*
             tvTitle = itemView.findViewById(R.id.tvTitle);
@@ -99,8 +125,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         }
 
         public void bind(Movie movie) {
-            tvTitle.setText(movie.getTitle());
-            tvOverview.setText(movie.getOverview());
+            binding.tvTitle.setText(movie.getTitle());
+            binding.tvOverview.setText(movie.getOverview());
 
             String imageUrl;
             int placeholderID;
@@ -116,11 +142,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 placeholderID = R.drawable.flicks_movie_placeholder;
             }
 
+            // Adds a placeholder image
             Glide.with(context).load(imageUrl)
                     .placeholder(placeholderID)
                     .centerCrop()
                     .transform(new RoundedCorners(50))
-                    .into(ivPoster);
+                    .into(binding.ivPoster);
+
         }
     }
 }
