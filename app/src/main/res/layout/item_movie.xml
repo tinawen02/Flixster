@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
-d
+    android:layout_height="200dp"
+    android:background="#000000">
+    d
+
     <ImageView
         android:id="@+id/ivPoster"
         android:layout_width="120dp"
@@ -22,7 +24,10 @@ d
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@+id/ivPoster"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
+        android:textStyle="bold"
         tools:text="Fast Furious Presents: Hobbs Shaw" />
 
     <TextView
@@ -33,8 +38,10 @@ d
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivPoster"
-        android:maxLines="6"
         android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="6"
+        android:textColor="#FFFFFF"
         tools:text="A spinoff of The Fate of the Furious, focusing on Johnson's US Diplomatic Security Agent Luke Hobbs forming an unlikely alliance with Statham's Deckard Shaw." />
 
     <View

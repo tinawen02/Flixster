@@ -3,6 +3,7 @@ package com.example.flixster.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,12 +76,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
         ItemMovieBinding binding;
 
-        TextView tvTitle;
-        TextView tvOverview;
-        ImageView ivPoster;
-
         // used for reducing view boilerplate
-
         public ViewHolder(@NonNull ItemMovieBinding itemView) {
             //super(itemView);      //Instead of this
             super(itemView.getRoot());
@@ -118,6 +114,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 // show the activity
                 context.startActivity(intent);
             }
+
+
         }
 
         public void bind(Movie movie) {
