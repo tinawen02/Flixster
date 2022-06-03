@@ -30,6 +30,8 @@ public class Movie {
         posterPath = movie.getString("poster_path");
         backdropPath = movie.getString("backdrop_path");
         voteAverage = movie.getDouble("vote_average");
+
+
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {

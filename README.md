@@ -25,6 +25,8 @@ The following **stretch** features are implemented:
 The following **additional** features are implemented:
 
 * [ ] List anything else that you can get done to improve the app functionality!
+* Added white space between each movie to be more easily read
+* 
 
 ## Video Walkthrough
 
